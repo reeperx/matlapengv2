@@ -5,7 +5,7 @@ import { getCourseList } from "./../../../_services/index";
 import CategoryFilter from "./_components/CategoryFilter";
 import CourseList from "./_components/CourseList";
 
-function DashboardPage() {
+function BrowsePage() {
   const [courses, setCourses] = useState([]);
   const [coursesOrg, setCoursesOrg] = useState([]);
 
@@ -45,4 +45,4 @@ function DashboardPage() {
   );
 }
 
-export default DashboardPage;
+export default BrowsePage;
