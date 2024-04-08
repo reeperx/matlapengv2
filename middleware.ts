@@ -1,7 +1,7 @@
 import { authMiddleware } from "@clerk/nextjs";
 
 export default authMiddleware({
-    publicRoutes:["/browse", "/course-preview/(.*)"]
+    publicRoutes:["/", "/browse", "/course-preview/(.*)",]
 });
 
 export const config = {
