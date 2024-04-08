@@ -6,6 +6,8 @@ import FullVideoPlayer from "../_components/FullVideoPlayer";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { getCourseById } from "./../../../../_services/index";
 import { CompletedChapterContext } from "./../../../../../app/_context/CompletedChapterContext";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 function ViewCourse({ params }) {
   const { user } = useUser();
@@ -13,6 +15,7 @@ function ViewCourse({ params }) {
   const [userCourse, setUserCourse] = useState();
   const [activeChapter, setActiveChapter] = useState();
   const [completedChapter, setCompletedChapter] = useState();
+  const router = useRouter();
 
   useEffect(() => {
     user ? getCourse() : null;
@@ -45,10 +48,22 @@ function ViewCourse({ params }) {
             ) : null}
           </div>
           <div className="ml-80">
-            <div className="float-right p-5">
-              <UserButton />
+            <div className="float-right p-5 flex items-center">
+              <Button
+                variant="default"
+                onClick={() => router.push("/browse")}
+                className="ml-2 text-white font-bold py-2 px-4 rounded"
+              >
+                Go Back
+              </Button>
+              <div className="ml-4">
+                <UserButton />
+              </div>
             </div>
-            <FullVideoPlayer userCourse={userCourse} activeChapter={activeChapter} />
+            <FullVideoPlayer
+              userCourse={userCourse}
+              activeChapter={activeChapter}
+            />
           </div>
         </CompletedChapterContext.Provider>
       </div>
