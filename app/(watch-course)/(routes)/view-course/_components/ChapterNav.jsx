@@ -1,12 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PlayCircle, PauseCircle, CheckCircle2 } from "lucide-react";
+import { CompletedChapterContext } from "./../../../../../app/_context/CompletedChapterContext";
+
 
 function ChapterNav({ course, userCourse, setActiveChapter }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { completedChapter, setCompletedChapter } = useContext(
+    CompletedChapterContext
+  );
 
   useEffect(() => {
     setActiveChapter(course?.chapter[0]);
   }, []);
+
+  const isChapterCompleted = (chapterId) => {
+    return completedChapter?.find((item) => item.chapterId == chapterId);
+  };
 
   return (
     <div>
@@ -22,12 +31,20 @@ function ChapterNav({ course, userCourse, setActiveChapter }) {
               setActiveChapter(chapter);
             }}
             key={index}
-            className={`flex gap-2 text-gray-500 text-[16px] px-5 p-4 cursor-pointer hover:bg-orange-200 ${
-              activeIndex == index ? "bg-amber-100 text-orange-700" : null
+            className={`flex gap-2 text-gray-500 md:text-[14px] text-[12px] px-5 p-4 cursor-pointer ${
+              isChapterCompleted(chapter.chapterNumber)
+                ? "bg-orange-100 text-orange-600"
+                : "hover:bg-orange-200"
+            } ${
+              activeIndex === index
+                ? "bg-amber-100 text-orange-700"
+                : ""
             }`}
           >
-            {activeIndex == index ? (
+            {activeIndex === index ? (
               <PauseCircle height={25} width={25} />
+            ) : isChapterCompleted(chapter.chapterNumber) ? (
+              <CheckCircle2 height={25} width={25} />
             ) : (
               <PlayCircle height={25} width={25} />
             )}

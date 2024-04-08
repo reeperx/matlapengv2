@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-function CategoryFilter() {
+function CategoryFilter({selectedCategory}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const filterOptions = [
     {
@@ -49,7 +49,10 @@ function CategoryFilter() {
     <div className="flex gap-5">
       {filterOptions.map((item, index) => (
         <button
-          onClick={() => setActiveIndex(index)}
+          onClick={() => {
+            setActiveIndex(index);
+            selectedCategory(item.value);
+          }}
           key={index}
           className={`border p-2 px-4 text-[12px] rounded-md hover:border-orange-300 font-semibold hover:bg-orange-50 ${
             activeIndex == index

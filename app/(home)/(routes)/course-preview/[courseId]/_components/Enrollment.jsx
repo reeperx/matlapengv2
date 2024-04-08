@@ -1,4 +1,4 @@
-import { EnrollCourse, PublishCourse } from "@/app/_services";
+import { EnrollCourse, PublishCourse } from "./../../../../../_services/index";
 import React from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";

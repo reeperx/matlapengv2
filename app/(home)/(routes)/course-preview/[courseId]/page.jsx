@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { getCourseById } from "@/app/_services";
+import { getCourseById } from "./../../../../_services/index";
 import VideoPlayer from "./_components/VideoPlayer";
 import CourseDetails from "./_components/CourseDetails";
 import EnrollmentSection from "./_components/EnrollmentSection";

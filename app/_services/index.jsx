@@ -59,6 +59,7 @@ export const getCourseById = async (id, userEmail) => {
     `"}) {
         courseId
         userEmail
+        id
         completedChapter {
             ... on CompletedChapter {
                 chapterId
@@ -94,9 +95,37 @@ export const PublishCourse = async (id) => {
   const mutationQuery =
     gql`
     mutation EnrollCourse {
-      publishUserEnrollCourse(where: {id: "`+id+`"})
+      publishUserEnrollCourse(where: {id: "` +
+    id +
+    `"})
       {
         id
+      }
+    }
+  `;
+  const result = await request(MASTER_URL, mutationQuery);
+  return result;
+};
+
+export const markChapterCompletedService = async (recordId, chapterNumber) => {
+  const mutationQuery = gql`
+    mutation MarkCourseComplete {
+      updateUserEnrollCourse(
+        data: {
+          completedChapter: {
+            create: { CompletedChapter: { data: { chapterId: "`+chapterNumber+`" } } }
+          }
+        }
+        where: { id: "`+recordId+`" }
+      ) {
+        id
+      }
+      publishManyUserEnrollCoursesConnection(to: PUBLISHED) {
+        edges {
+          node {
+            id
+          }
+        }
       }
     }
   `;

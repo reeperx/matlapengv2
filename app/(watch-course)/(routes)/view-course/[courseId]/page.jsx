@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import ChapterNav from "../_components/ChapterNav";
 import FullVideoPlayer from "../_components/FullVideoPlayer";
 import { UserButton, useUser } from "@clerk/nextjs";
-import { getCourseById } from "@/app/_services";
-import { CompletedChapterContext } from "@/app/_context/CompletedChapterContext";
+import { getCourseById } from "./../../../../_services/index";
+import { CompletedChapterContext } from "./../../../../../app/_context/CompletedChapterContext";
 
 function ViewCourse({ params }) {
   const { user } = useUser();
@@ -48,7 +48,7 @@ function ViewCourse({ params }) {
             <div className="float-right p-5">
               <UserButton />
             </div>
-            <FullVideoPlayer activeChapter={activeChapter} />
+            <FullVideoPlayer userCourse={userCourse} activeChapter={activeChapter} />
           </div>
         </CompletedChapterContext.Provider>
       </div>
