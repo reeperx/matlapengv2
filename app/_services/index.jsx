@@ -108,15 +108,20 @@ export const PublishCourse = async (id) => {
 };
 
 export const markChapterCompletedService = async (recordId, chapterNumber) => {
-  const mutationQuery = gql`
+  const mutationQuery =
+    gql`
     mutation MarkCourseComplete {
       updateUserEnrollCourse(
         data: {
           completedChapter: {
-            create: { CompletedChapter: { data: { chapterId: "`+chapterNumber+`" } } }
+            create: { CompletedChapter: { data: { chapterId: "` +
+    chapterNumber +
+    `" } } }
           }
         }
-        where: { id: "`+recordId+`" }
+        where: { id: "` +
+    recordId +
+    `" }
       ) {
         id
       }
@@ -130,5 +135,29 @@ export const markChapterCompletedService = async (recordId, chapterNumber) => {
     }
   `;
   const result = await request(MASTER_URL, mutationQuery);
+  return result;
+};
+
+export const getUserCourseList = async (userEmail) => {
+  const query = gql`
+    query UserCourseList {
+      userEnrollCourses(where: { userEmail: "`+userEmail+`" }) {
+        courseList {
+          author
+          banner {
+            url
+          }
+          description
+          name
+          id
+          free
+          sourceCode
+          tags
+          totalChapters
+        }
+      }
+    }
+  `;
+  const result = await request(MASTER_URL, query);
   return result;
 };
