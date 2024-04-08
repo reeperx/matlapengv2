@@ -38,11 +38,11 @@ export const getCourseById = async (id, userEmail) => {
           ... on Chapter {
             id
             name
-            chapterNumber
             video {
               url
             }
             youtubeUrl
+            chapterNumber
           }
         }
         description
@@ -50,6 +50,7 @@ export const getCourseById = async (id, userEmail) => {
         id
         free
         totalChapters
+        author
       }
       userEnrollCourses(where: {courseId: "` +
     id +
