@@ -29,8 +29,8 @@ function DasboardPage() {
       
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-5 gap-5">
           {userCourseList &&
-            userCourseList.map((course) => {
-              <div>
+            userCourseList.map((course, index) => {
+              <div key={index}>
                 <CategoryItem course={course?.courseList} />
               </div>;
             })}
